@@ -1,0 +1,821 @@
+//@import 'https://fonts.googleapis.com/css?family=Lato:600,700';
+@import "vars";
+@import "mixins";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+}
+
+body {
+    color: $colorMainText;
+    background-color: $colorMainBackground;
+}
+
+.adminOnly {
+    display: none; // color: $colorSecondText;
+    // background-color: $colorSecondAccent;
+}
+
+.wrapSet {
+    display: inline-block;
+}
+
+.artfulSeparator {
+    display: block;
+    margin: 1em 0;
+    width: 100%;
+    height: .2em;
+    border-radius: $cardBorderRadius;
+    background: linear-gradient(to right, $colorSecondAccent 0%, $colorSecondAccent 25%, lighten($colorSecondAccent, 25%) 25%, lighten($colorSecondAccent, 25%) 100%);
+}
+
+svg.logo {
+    width: 100%;
+    max-width: 20vw;
+    g.logomark path {
+        fill: $colorSecondText;
+    }
+    g.nameText {
+        display: none;
+        &.path {
+            fill: $colorMainText;
+            fill: #222;
+        }
+    }
+}
+
+@media (min-width: 30rem) {
+    svg.logo {
+        max-width: 7.5rem;
+        g.nameText {
+            display: block;
+        }
+    }
+}
+
+hr.subtleSeparator {
+    margin: 2em auto;
+    width: 10%;
+    border: none;
+    border-top: 3px solid transparentize($colorMainAccent, .6);
+}
+
+.button,
+.clickLink {
+    cursor: pointer;
+    &:active {
+        position: relative;
+        top: 1px;
+        opacity: .5;
+    }
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $colorSecondText;
+    background-color: $colorMainAccent;
+    transition: background .5s;
+    svg.logo {
+        flex: 1 1 50%;
+        padding: .25em;
+        transition: fill .75s;
+    }
+    div.toggleGlobalNav {
+        display: block;
+        padding: .75em;
+        font-size: 1.4em;
+        i.fa {
+            margin-right: .25em;
+        }
+    }
+    nav.global {
+        flex: 1 1 100%;
+        display: none;
+        background-color: lighten($colorMainAccent, 7.5%);
+        div.navItem {
+            padding: .5em;
+            font-size: 1.25em;
+            text-align: center;
+            border: none;
+            border-top: .125em solid transparent;
+            border-bottom: .125em solid transparent;
+            &.signOut {
+                display: none;
+            }
+            &.selected {
+                border-bottom-color: transparent;
+                background-color: darken($colorMainAccent, 7.5%);
+                transition: border .66s, background .66s;
+            }
+        }
+    }
+}
+
+@media (min-width: 32rem) {
+    header {
+        color: $colorMainAccent;
+        background-color: $colorSecondText;
+        svg.logo {
+            g.logomark path {
+                fill: $colorMainAccent;
+            }
+        }
+        div.toggleGlobalNav {
+            display: none;
+        }
+        nav.global {
+            flex: 1 1 50%;
+            display: flex !important; //override jquery animation styling
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: transparent;
+            div.navItem {
+                padding-top: .25em;
+                padding-bottom: .25em;
+                &.selected {
+                    background-color: transparent;
+                    border-bottom-color: $colorMainText;
+                    transition: border 1s, background 1s;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 50rem) {
+    header {
+        div.toggleGlobalNav {
+            display: none;
+        }
+        nav.global {
+            div.navItem {
+                font-size: 1.25em;
+            }
+        }
+    }
+}
+
+div.inputGroup {
+    width: 100%;
+    padding: .375em 2.5%;
+    label {
+        font-size: .85em;
+        padding-left: .25em;
+    }
+}
+
+div.fancyInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.15em;
+    color: $colorMainAccent;
+    background-color: lighten($colorMainBackground, 1%);
+    border-radius: 2em;
+    input {
+        width: 100%;
+        padding: .2em .5em;
+        font-size: 0.7em;
+        background: none;
+        border: none;
+        outline: none;
+        appearance: none;
+    }
+    div.element {
+        padding: .2em .5em .2em .5em;
+        color: gray;
+        div.button {
+            color: $colorMainAccent;
+        }
+    }
+}
+
+.fancyButton {
+    display: block;
+    width: 100%;
+    max-width: 15em;
+    margin: .375em 0;
+    padding: .2em .5em;
+    font-size: 1.3em;
+    color: $colorSecondText;
+    background-color: $colorMainAccent;
+    border: 1px solid $colorMainAccent;
+    border-radius: 2em;
+    text-transform: uppercase;
+    outline: none;
+    appearance: none;
+    &.secondary {
+        color: $colorMainAccent;
+        background-color: lighten($colorMainBackground, 1%);
+    }
+    div.hint {
+        font-size: .66em;
+        opacity: .75;
+    }
+}
+
+div.userNote {
+    padding: .5em;
+    font-size: .8em;
+    opacity: .8;
+    text-align: center;
+    font-style: italic;
+}
+
+div.containerSearch {
+    padding: 11vh 0 4vh 0;
+    @include pagePadding();
+    background-image: url(../images/system/header-hero-2017-12-13.jpg);
+    background-size: cover;
+    background-position: right bottom;
+    transition: background .5s;
+    div.search {
+        margin: 0 auto;
+        font-size: 1.5em;
+        max-width: 30rem;
+        max-width: 38rem;
+    }
+}
+
+@media screen and (min-width:35rem)and (min-height:35rem) {
+    div.containerSearch {
+        padding-top: 9rem;
+        padding-bottom: 9rem;
+        transition: padding 1s;
+        background-position: right center;
+    }
+}
+
+div.containerPages {
+    div.page {
+        display: none;
+        padding: 0 0 1em 0;
+        &.selected {
+            display: block;
+        }
+    }
+}
+
+div.containerPopup {
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    div.background {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        overflow-x: scroll;
+        padding: 0;
+        div.popup {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            color: $colorMainText;
+            background-color: $colorMainBackground;
+            @include cardEdges();
+            border-radius: 0;
+            div.header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                height: 12.5vh;
+                padding: .5em;
+            }
+            div.popupBody {
+                display: flex;
+                height: 80vh;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                padding: 1em .5em;
+                label {
+                    color: $colorMainAccent;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 30rem) {
+    div.containerPopup {
+        div.background {
+            padding: 1em;
+            background-color: transparentize($colorMainBackground, .2);
+            div.popup {
+                width: 100%;
+                height: 75%;
+                max-width: 30em;
+                max-height: 50em;
+                border-radius: .25em;
+                color: $colorSecondText;
+                background-color: $colorMainAccent;
+                div.header {
+                    font-size: 1.5em;
+                    height: auto;
+                    padding: .5em;
+                }
+                div.popupBody {
+                    height: auto;
+                    hr {
+                        border-color: transparentize($colorSecondText, .5);
+                    }
+                    label {
+                        color: $colorSecondText;
+                    }
+                }
+                .fancyButton {
+                    color: $colorMainAccent;
+                    border-color: $colorSecondText;
+                    background-color: $colorSecondText;
+                    .secondary {
+                        color: $colorSecondText;
+                        border-color: $colorSecondText;
+                        background-color: $colorMainAccent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+div.filterContainer {
+    padding-top: 1em;
+    @include pagePadding();
+    div.filter {
+        max-width: 33em;
+        margin: 0 auto;
+        color: black;
+        background-color: darken(whitesmoke, 2%);
+        border: 1px solid lightgray;
+        border-radius: .25em;
+        div.filterContent {
+            display: none;
+            padding: .5em;
+        }
+        div.filterHeader {
+            display: flex;
+            flex-direction: row;
+            padding: .5em;
+            div.name {
+                font-weight: bold;
+                flex: 1 1 80%;
+                text-align: center;
+            }
+            div.button {
+                flex: 1 1 20%;
+            }
+        }
+        .actionIndicator {
+            transition: transform .9s;
+        }
+        div.filterChoice {
+            margin-top: .25em;
+            padding: .5em;
+            border-radius: .25em;
+            i {
+                opacity: 0;
+            }
+            &.selected {
+                color: $colorSecondText;
+                background: $colorMainAccent;
+                i {
+                    opacity: 1;
+                    color: $colorMainText;
+                }
+            }
+        }
+        div.expandGroup {
+            padding: .5em 0;
+            border-top: 1px dotted lightgray;
+            &:first-of-type {
+                border-top: none;
+            }
+        }
+        div.filterSlider {
+            margin-top: .5em;
+            .ui-widget-header {
+                background-color: $colorMainAccent;
+            }
+        }
+    }
+}
+
+div.eventsList {
+    display: flex;
+    flex-direction: column;
+    div.groupHeader {
+        flex: 1 1 100%;
+        padding: 2em 0 1em 0;
+        @include pagePadding();
+        div.subheading {
+            font-size: 1.25em;
+            color: $colorMainText;
+        }
+        div.artfulSeparator {
+            margin-bottom: 0;
+        }
+    }
+    div.eventCardContainer {
+        flex: 0 1 100%;
+        padding: 1em 0;
+        @include pagePadding();
+    }
+}
+
+@media screen and (min-width:45rem) {
+    div.eventsList {
+        flex-direction: row;
+        flex-wrap: wrap;
+        div.eventCardContainer {
+            flex-basis: 50%;
+        }
+    }
+}
+
+@media screen and (min-width:65rem) {
+    div.eventsList {
+        div.eventCardContainer {
+            flex-basis: calc(100% / 3);
+        }
+    }
+    div.eventDetail{
+        div.section.visual {
+            height: 20rem !important;
+            max-height: 60vh !important;
+    } 
+}
+
+div.badgeFree {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: $colorSecondText;
+    padding: .1em .5em .3em .5em;
+    background-color: transparentize($colorSecondAccent, .2);
+    border-bottom-right-radius: $cardBorderRadius;
+}
+
+.button.action {
+    color: $colorSecondText;
+    background-color: $colorThirdAccent;
+    margin-left: .5em;
+    display: inline-flex;
+    width: 2em;
+    height: 2em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    &.adminOnly {
+        display: none;
+        background-color: $colorSecondAccent;
+        &.show {
+            display: inline-flex !important;
+        }
+    }
+}
+
+div.eventCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: $colorSecondText;
+    background-color: $colorMainAccent;
+    overflow: hidden;
+    @include cardEdges();
+    div.section {
+        flex: 1 1 100%;
+        padding: .33em .5em;
+        &.visual {
+            position: relative;
+            height: 10em;
+            background-image: url(../images/system/event-image-missing.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            &:nth-of-type(1) {
+                background-image: url(../images/content/event-image-1.jpg);
+            }
+            div.badgeFree {
+                font-size: 1.1;
+            }
+        }
+        &.header {
+            font-size: 1.25em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+        &.keywords {
+            flex: 1 1 70%;
+            display: flex;
+            align-items: flex-end;
+        }
+        &.date {
+            flex: 1 1 30%;
+            display: flex;
+            align-items: flex-end;
+            font-size: .9em;
+            text-align: center;
+        }
+        &.actions {
+            text-align: right;
+            font-size: 1.2em;
+        }
+    }
+}
+
+div.eventDetail {
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: $colorMainText;
+    overflow: hidden;
+    div.section {
+        flex: 1 1 100%;
+        padding: .5em .75em;
+        font-size: 1.1em;
+        &.header {
+            font-size: 1.5em;
+            line-height: 1.25;
+        }
+        &.visual {
+            display: flex;
+            position: relative;
+            height: 15rem;
+            max-height: 33vh;
+            background-image: url(../images/system/event-image-missing.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            &:nth-of-type(1) {
+                background-image: url(../images/content/event-image-1.jpg);
+            }
+            div.actions {
+                flex: 1 1 100%;
+                align-self: flex-end;
+                justify-self: flex-end;
+                text-align: right;
+                font-size: 1.4em;
+            }
+        }
+        &.actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: .15em 0;
+            background: transparentize(lighten($colorMainBackground, 25%), .05);
+            border-top: 1px solid white;
+            >div {
+                padding: .25em .5em;
+                text-align: center;
+            }
+            .clickLink {
+                font-size: 1.5em;
+                span.label {
+                    display: none;
+                }
+            }
+        }
+        &.header {
+            .title {
+                font-size: 1.25em;
+                font-weight: bold;
+                letter-spacing: .1em;
+            }
+        }
+        .subheading {
+            margin: 1em 0 .5em 0;
+            color: $colorMainAccent;
+            text-transform: uppercase;
+        }
+        .iconList {
+            .iconListItem {
+                display: flex;
+                width: 100%;
+                margin-bottom: .25em;
+                .icon {
+                    color: $colorMainAccent;
+                    padding-right: .5em;
+                }
+            }
+        }
+        .clickLink {
+            margin: .5em 0;
+            color: $colorSecondAccent;
+            font-size: .9em;
+            text-transform: uppercase;
+            letter-spacing: -.033em;
+        }
+        .button.mainAction {
+            margin: 0;
+            width: 100%;
+            max-width: 20em;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            color: $colorSecondAccent;
+            background-color: $colorSecondText;
+            border: 1px solid $colorSecondAccent;
+            border-radius: $cardBorderRadius;
+            padding: .55em;
+            text-align: center;
+            transition: color .5s, background .5s;
+            &:hover {
+                color: $colorSecondText;
+                background-color: $colorSecondAccent;
+            }
+        }
+    }
+    div.mapEventLocation {
+        width: 100%;
+        min-height: 20em;
+        background: whitesmoke;
+        div#sampleEventMap {
+            border-radius: $cardBorderRadius;
+            border: 1px solid whitesmoke;
+        }
+    }
+}
+
+@media screen and (min-width:30rem) {
+    div.eventDetail {
+        div.section {
+            &.statistics,
+            &.date {
+                flex: 1 1 100%;
+            }
+            &.actions {
+                padding: .25em 0;
+                .clickLink {
+                    font-size: 1em;
+                    span.label {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+div.standAloneButtonContainer {
+    padding: .5rem;
+    span.clickLink {
+        vertical-align: middle;
+    }
+    &.adminOnly {
+        background-color: transparent;
+        span.button {
+            display: inline-block;
+            max-width: 10em;
+            text-align: center;
+            vertical-align: middle;
+            background-color: $colorSecondAccent;
+            border-color: $colorSecondAccent;
+        }
+    }
+}
+
+div#systemLockMessageContainer {
+    z-index: 1000;
+    >div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        background: transparentize($colorMainBackground, .5);
+        div.systemLoading {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 15em;
+            height: 15em;
+            color: #373737;
+            background: transparentize(lighten($colorMainBackground, 25%), .05);
+            border: 1px solid $colorMainBackground;
+            padding: .5em;
+            border-radius: 100%;
+            svg.logo {
+                animation-name: pulseAndFlip;
+                animation-duration: 2.5s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                g.logomark path {
+                    animation-name: cycleColorFill;
+                    animation-duration: 2s;
+                    animation-timing-function: ease-out;
+                    animation-iteration-count: infinite;
+                }
+            }
+            div.message {
+                font-weight: normal;
+                font-size: 2em;
+            }
+        }
+    }
+}
+
+div.blankPageMessage {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 5vh 2vw;
+    text-align: center;
+    font-size: 1.5em;
+    div.pageIcon {
+        color: $colorMainAccent;
+        font-size: 2em;
+        padding-bottom: .5em;
+        i.fa {
+            transform: rotate(30deg);
+        }
+        &.tilt {
+            font-size: 2em;
+            padding-bottom: .75em;
+            i.fa {
+                //transform: rotate(0deg);
+                animation-name: tiltLeftRight;
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+        }
+    }
+    span.clickLink {
+        color: $colorMainAccent;
+        text-decoration: underline;
+    }
+}
+
+@media screen and (min-width:30rem) {
+    div.blankPageMessage {
+        padding: 15vh 10vw;
+        font-size: 1.75em;
+        div.pageIcon {
+            font-size: 2.5em;
+        }
+    }
+}
+
+div#userMessageContainer {
+    position: fixed;
+    z-index: 2000;
+    width: 100%;
+    padding: 0;
+    top: 0;
+    left: 0;
+    >div {
+        display: block;
+        padding: .5em;
+        font-size: 1.25em;
+        text-align: center;
+        color: $colorSecondText;
+        background-color: $colorSecondAccent;
+        &.error {
+            font-weight: bold;
+            background-color: tomato;
+        }
+    }
+}
+
+input,
+select,
+textarea {
+    font-size: 1.25em;
+    padding: .25em;
+    border-radius: $cardBorderRadius;
+    background: white;
+    border: 1px solid gray;
+}
+
+textarea {
+    width: 100%;
+    min-height: 10em;
+    resize: vertical;
+}

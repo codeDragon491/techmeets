@@ -1,0 +1,54 @@
+@import "vars";
+@import "mixins";
+
+/* ANIMATIONS */
+
+@keyframes pulseAndFlip {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    25% {
+        transform: rotateZ(-180deg);
+    }
+    50% {
+        transform: rotateX(180deg);
+    }
+    75% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+// cycles an SVG fill property with site's main accent colors
+@keyframes cycleColorFill {
+    0% {
+        fill: $colorMainAccent;
+    }
+    33% {
+        fill: $colorSecondAccent;
+    }
+    66% {
+        fill: $colorThirdAccent;
+    }
+    100% {
+        fill: $colorMainAccent;
+    }
+}
+
+// rock back and forth
+@keyframes tiltLeftRight {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}

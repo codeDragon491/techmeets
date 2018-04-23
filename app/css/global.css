@@ -1,0 +1,887 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+}
+
+body {
+  color: #373737;
+  background-color: #f8f8f8;
+}
+
+.adminOnly {
+  display: none;
+}
+
+.wrapSet {
+  display: inline-block;
+}
+
+.artfulSeparator {
+  display: block;
+  margin: 1em 0;
+  width: 100%;
+  height: .2em;
+  border-radius: 0.15rem;
+  background: linear-gradient(to right, #F37A28 0%, #F37A28 25%, #fac5a1 25%, #fac5a1 100%);
+}
+
+svg.logo {
+  width: 100%;
+  max-width: 20vw;
+}
+
+svg.logo g.logomark path {
+  fill: whitesmoke;
+}
+
+svg.logo g.nameText {
+  display: none;
+}
+
+svg.logo g.nameText.path {
+  fill: #373737;
+  fill: #222;
+}
+
+@media (min-width: 30rem) {
+  svg.logo {
+    max-width: 7.5rem;
+  }
+  svg.logo g.nameText {
+    display: block;
+  }
+}
+
+hr.subtleSeparator {
+  margin: 2em auto;
+  width: 10%;
+  border: none;
+  border-top: 3px solid rgba(76, 181, 152, 0.4);
+}
+
+.button,
+.clickLink {
+  cursor: pointer;
+}
+
+.button:active,
+.clickLink:active {
+  position: relative;
+  top: 1px;
+  opacity: .5;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: whitesmoke;
+  background-color: #4CB598;
+  transition: background .5s;
+}
+
+header svg.logo {
+  flex: 1 1 50%;
+  padding: .25em;
+  transition: fill .75s;
+}
+
+header div.toggleGlobalNav {
+  display: block;
+  padding: .75em;
+  font-size: 1.4em;
+}
+
+header div.toggleGlobalNav i.fa {
+  margin-right: .25em;
+}
+
+header nav.global {
+  flex: 1 1 100%;
+  display: none;
+  background-color: #67c0a8;
+}
+
+header nav.global div.navItem {
+  padding: .5em;
+  font-size: 1.25em;
+  text-align: center;
+  border: none;
+  border-top: .125em solid transparent;
+  border-bottom: .125em solid transparent;
+}
+
+header nav.global div.navItem.signOut {
+  display: none;
+}
+
+header nav.global div.navItem.selected {
+  border-bottom-color: transparent;
+  background-color: #409b82;
+  transition: border .66s, background .66s;
+}
+
+@media (min-width: 32rem) {
+  header {
+    color: #4CB598;
+    background-color: whitesmoke;
+  }
+  header svg.logo g.logomark path {
+    fill: #4CB598;
+  }
+  header div.toggleGlobalNav {
+    display: none;
+  }
+  header nav.global {
+    flex: 1 1 50%;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: transparent;
+  }
+  header nav.global div.navItem {
+    padding-top: .25em;
+    padding-bottom: .25em;
+  }
+  header nav.global div.navItem.selected {
+    background-color: transparent;
+    border-bottom-color: #373737;
+    transition: border 1s, background 1s;
+  }
+}
+
+@media (min-width: 50rem) {
+  header div.toggleGlobalNav {
+    display: none;
+  }
+  header nav.global div.navItem {
+    font-size: 1.25em;
+  }
+}
+
+div.inputGroup {
+  width: 100%;
+  padding: .375em 2.5%;
+}
+
+div.inputGroup label {
+  font-size: .85em;
+  padding-left: .25em;
+}
+
+div.fancyInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15em;
+  color: #4CB598;
+  background-color: #fbfbfb;
+  border-radius: 2em;
+}
+
+div.fancyInput input {
+  width: 100%;
+  padding: .2em .5em;
+  font-size: 0.7em;
+  background: none;
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+div.fancyInput div.element {
+  padding: .2em .5em .2em .5em;
+  color: gray;
+}
+
+div.fancyInput div.element div.button {
+  color: #4CB598;
+}
+
+.fancyButton {
+  display: block;
+  width: 100%;
+  max-width: 15em;
+  margin: .375em 0;
+  padding: .2em .5em;
+  font-size: 1.3em;
+  color: whitesmoke;
+  background-color: #4CB598;
+  border: 1px solid #4CB598;
+  border-radius: 2em;
+  text-transform: uppercase;
+  outline: none;
+  appearance: none;
+}
+
+.fancyButton.secondary {
+  color: #4CB598;
+  background-color: #fbfbfb;
+}
+
+.fancyButton div.hint {
+  font-size: .66em;
+  opacity: .75;
+}
+
+div.userNote {
+  padding: .5em;
+  font-size: .8em;
+  opacity: .8;
+  text-align: center;
+  font-style: italic;
+}
+
+div.containerSearch {
+  padding: 11vh 0 4vh 0;
+  padding-left: 3.33%;
+  padding-right: 3.33%;
+  background-image: url(../images/system/header-hero-2017-12-13.jpg);
+  background-size: cover;
+  background-position: right bottom;
+  transition: background .5s;
+}
+
+div.containerSearch div.search {
+  margin: 0 auto;
+  font-size: 1.5em;
+  max-width: 30rem;
+  max-width: 38rem;
+}
+
+@media screen and (min-width: 35rem) and (min-height: 35rem) {
+  div.containerSearch {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+    transition: padding 1s;
+    background-position: right center;
+  }
+}
+
+div.containerPages div.page {
+  display: none;
+  padding: 0 0 1em 0;
+}
+
+div.containerPages div.page.selected {
+  display: block;
+}
+
+div.containerPopup {
+  display: none;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+div.containerPopup div.background {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: scroll;
+  padding: 0;
+}
+
+div.containerPopup div.background div.popup {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  color: #373737;
+  background-color: #f8f8f8;
+  border-radius: 0.15rem;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33);
+  border-radius: 0;
+}
+
+div.containerPopup div.background div.popup div.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 12.5vh;
+  padding: .5em;
+}
+
+div.containerPopup div.background div.popup div.popupBody {
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em .5em;
+}
+
+div.containerPopup div.background div.popup div.popupBody label {
+  color: #4CB598;
+}
+
+@media (min-width: 30rem) {
+  div.containerPopup div.background {
+    padding: 1em;
+    background-color: rgba(248, 248, 248, 0.8);
+  }
+  div.containerPopup div.background div.popup {
+    width: 100%;
+    height: 75%;
+    max-width: 30em;
+    max-height: 50em;
+    border-radius: .25em;
+    color: whitesmoke;
+    background-color: #4CB598;
+  }
+  div.containerPopup div.background div.popup div.header {
+    font-size: 1.5em;
+    height: auto;
+    padding: .5em;
+  }
+  div.containerPopup div.background div.popup div.popupBody {
+    height: auto;
+  }
+  div.containerPopup div.background div.popup div.popupBody hr {
+    border-color: rgba(245, 245, 245, 0.5);
+  }
+  div.containerPopup div.background div.popup div.popupBody label {
+    color: whitesmoke;
+  }
+  div.containerPopup div.background div.popup .fancyButton {
+    color: #4CB598;
+    border-color: whitesmoke;
+    background-color: whitesmoke;
+  }
+  div.containerPopup div.background div.popup .fancyButton .secondary {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    background-color: #4CB598;
+  }
+}
+
+div.filterContainer {
+  padding-top: 1em;
+  padding-left: 3.33%;
+  padding-right: 3.33%;
+}
+
+div.filterContainer div.filter {
+  max-width: 33em;
+  margin: 0 auto;
+  color: black;
+  background-color: #f0f0f0;
+  border: 1px solid lightgray;
+  border-radius: .25em;
+}
+
+div.filterContainer div.filter div.filterContent {
+  display: none;
+  padding: .5em;
+}
+
+div.filterContainer div.filter div.filterHeader {
+  display: flex;
+  flex-direction: row;
+  padding: .5em;
+}
+
+div.filterContainer div.filter div.filterHeader div.name {
+  font-weight: bold;
+  flex: 1 1 80%;
+  text-align: center;
+}
+
+div.filterContainer div.filter div.filterHeader div.button {
+  flex: 1 1 20%;
+}
+
+div.filterContainer div.filter .actionIndicator {
+  transition: transform .9s;
+}
+
+div.filterContainer div.filter div.filterChoice {
+  margin-top: .25em;
+  padding: .5em;
+  border-radius: .25em;
+}
+
+div.filterContainer div.filter div.filterChoice i {
+  opacity: 0;
+}
+
+div.filterContainer div.filter div.filterChoice.selected {
+  color: whitesmoke;
+  background: #4CB598;
+}
+
+div.filterContainer div.filter div.filterChoice.selected i {
+  opacity: 1;
+  color: #373737;
+}
+
+div.filterContainer div.filter div.expandGroup {
+  padding: .5em 0;
+  border-top: 1px dotted lightgray;
+}
+
+div.filterContainer div.filter div.expandGroup:first-of-type {
+  border-top: none;
+}
+
+div.filterContainer div.filter div.filterSlider {
+  margin-top: .5em;
+}
+
+div.filterContainer div.filter div.filterSlider .ui-widget-header {
+  background-color: #4CB598;
+}
+
+div.eventsList {
+  display: flex;
+  flex-direction: column;
+}
+
+div.eventsList div.groupHeader {
+  flex: 1 1 100%;
+  padding: 2em 0 1em 0;
+  padding-left: 3.33%;
+  padding-right: 3.33%;
+}
+
+div.eventsList div.groupHeader div.subheading {
+  font-size: 1.25em;
+  color: #373737;
+}
+
+div.eventsList div.groupHeader div.artfulSeparator {
+  margin-bottom: 0;
+}
+
+div.eventsList div.eventCardContainer {
+  flex: 0 1 100%;
+  padding: 1em 0;
+  padding-left: 3.33%;
+  padding-right: 3.33%;
+}
+
+@media screen and (min-width: 45rem) {
+  div.eventsList {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  div.eventsList div.eventCardContainer {
+    flex-basis: 50%;
+  }
+}
+
+@media screen and (min-width: 65rem) {
+  div.eventsList div.eventCardContainer {
+    flex-basis: calc(100% / 3);
+  }
+  div.eventDetail div.section.visual {
+    height: 20rem !important;
+    max-height: 60vh !important;
+  }
+}
+
+div.badgeFree {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: whitesmoke;
+  padding: .1em .5em .3em .5em;
+  background-color: rgba(243, 122, 40, 0.8);
+  border-bottom-right-radius: 0.15rem;
+}
+
+.button.action {
+  color: whitesmoke;
+  background-color: #028EA3;
+  margin-left: .5em;
+  display: inline-flex;
+  width: 2em;
+  height: 2em;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.button.action.adminOnly {
+  display: none;
+  background-color: #F37A28;
+}
+
+.button.action.adminOnly.show {
+  display: inline-flex !important;
+}
+
+div.eventCard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: whitesmoke;
+  background-color: #4CB598;
+  overflow: hidden;
+  border-radius: 0.15rem;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33);
+}
+
+div.eventCard div.section {
+  flex: 1 1 100%;
+  padding: .33em .5em;
+}
+
+div.eventCard div.section.visual {
+  position: relative;
+  height: 10em;
+  background-image: url(../images/system/event-image-missing.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+div.eventCard div.section.visual:nth-of-type(1) {
+  background-image: url(../images/content/event-image-1.jpg);
+}
+
+div.eventCard div.section.visual div.badgeFree {
+  font-size: 1.1;
+}
+
+div.eventCard div.section.header {
+  font-size: 1.25em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+div.eventCard div.section.keywords {
+  flex: 1 1 70%;
+  display: flex;
+  align-items: flex-end;
+}
+
+div.eventCard div.section.date {
+  flex: 1 1 30%;
+  display: flex;
+  align-items: flex-end;
+  font-size: .9em;
+  text-align: center;
+}
+
+div.eventCard div.section.actions {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+div.eventDetail {
+  display: block;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: #373737;
+  overflow: hidden;
+}
+
+div.eventDetail div.section {
+  flex: 1 1 100%;
+  padding: .5em .75em;
+  font-size: 1.1em;
+}
+
+div.eventDetail div.section.header {
+  font-size: 1.5em;
+  line-height: 1.25;
+}
+
+div.eventDetail div.section.visual {
+  display: flex;
+  position: relative;
+  height: 15rem;
+  max-height: 33vh;
+  background-image: url(../images/system/event-image-missing.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+div.eventDetail div.section.visual:nth-of-type(1) {
+  background-image: url(../images/content/event-image-1.jpg);
+}
+
+div.eventDetail div.section.visual div.actions {
+  flex: 1 1 100%;
+  align-self: flex-end;
+  justify-self: flex-end;
+  text-align: right;
+  font-size: 1.4em;
+}
+
+div.eventDetail div.section.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: .15em 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid white;
+}
+
+div.eventDetail div.section.actions>div {
+  padding: .25em .5em;
+  text-align: center;
+}
+
+div.eventDetail div.section.actions .clickLink {
+  font-size: 1.5em;
+}
+
+div.eventDetail div.section.actions .clickLink span.label {
+  display: none;
+}
+
+div.eventDetail div.section.header .title {
+  font-size: 1.25em;
+  font-weight: bold;
+  letter-spacing: .1em;
+}
+
+div.eventDetail div.section .subheading {
+  margin: 1em 0 .5em 0;
+  color: #4CB598;
+  text-transform: uppercase;
+}
+
+div.eventDetail div.section .iconList .iconListItem {
+  display: flex;
+  width: 100%;
+  margin-bottom: .25em;
+}
+
+div.eventDetail div.section .iconList .iconListItem .icon {
+  color: #4CB598;
+  padding-right: .5em;
+}
+
+div.eventDetail div.section .clickLink {
+  margin: .5em 0;
+  color: #F37A28;
+  font-size: .9em;
+  text-transform: uppercase;
+  letter-spacing: -.033em;
+}
+
+div.eventDetail div.section .button.mainAction {
+  margin: 0;
+  width: 100%;
+  max-width: 20em;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  color: #F37A28;
+  background-color: whitesmoke;
+  border: 1px solid #F37A28;
+  border-radius: 0.15rem;
+  padding: .55em;
+  text-align: center;
+  transition: color .5s, background .5s;
+}
+
+div.eventDetail div.section .button.mainAction:hover {
+  color: whitesmoke;
+  background-color: #F37A28;
+}
+
+div.eventDetail div.mapEventLocation {
+  width: 100%;
+  min-height: 20em;
+  background: whitesmoke;
+}
+
+div.eventDetail div.mapEventLocation div#sampleEventMap {
+  border-radius: 0.15rem;
+  border: 1px solid whitesmoke;
+}
+
+@media screen and (min-width: 30rem) {
+  div.eventDetail div.section.statistics,
+  div.eventDetail div.section.date {
+    flex: 1 1 100%;
+  }
+  div.eventDetail div.section.actions {
+    padding: .25em 0;
+  }
+  div.eventDetail div.section.actions .clickLink {
+    font-size: 1em;
+  }
+  div.eventDetail div.section.actions .clickLink span.label {
+    display: inline-block;
+  }
+}
+
+div.standAloneButtonContainer {
+  padding: .5rem;
+}
+
+div.standAloneButtonContainer span.clickLink {
+  vertical-align: middle;
+}
+
+div.standAloneButtonContainer.adminOnly {
+  background-color: transparent;
+}
+
+div.standAloneButtonContainer.adminOnly span.button {
+  display: inline-block;
+  max-width: 10em;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #F37A28;
+  border-color: #F37A28;
+}
+
+div#systemLockMessageContainer {
+  z-index: 1000;
+}
+
+div#systemLockMessageContainer>div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(248, 248, 248, 0.5);
+}
+
+div#systemLockMessageContainer>div div.systemLoading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15em;
+  height: 15em;
+  color: #373737;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #f8f8f8;
+  padding: .5em;
+  border-radius: 100%;
+}
+
+div#systemLockMessageContainer>div div.systemLoading svg.logo {
+  animation-name: pulseAndFlip;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+div#systemLockMessageContainer>div div.systemLoading svg.logo g.logomark path {
+  animation-name: cycleColorFill;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+div#systemLockMessageContainer>div div.systemLoading div.message {
+  font-weight: normal;
+  font-size: 2em;
+}
+
+div.blankPageMessage {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 5vh 2vw;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+div.blankPageMessage div.pageIcon {
+  color: #4CB598;
+  font-size: 2em;
+  padding-bottom: .5em;
+}
+
+div.blankPageMessage div.pageIcon i.fa {
+  transform: rotate(30deg);
+}
+
+div.blankPageMessage div.pageIcon.tilt {
+  font-size: 2em;
+  padding-bottom: .75em;
+}
+
+div.blankPageMessage div.pageIcon.tilt i.fa {
+  animation-name: tiltLeftRight;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+div.blankPageMessage span.clickLink {
+  color: #4CB598;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 30rem) {
+  div.blankPageMessage {
+    padding: 15vh 10vw;
+    font-size: 1.75em;
+  }
+  div.blankPageMessage div.pageIcon {
+    font-size: 2.5em;
+  }
+}
+
+div#userMessageContainer {
+  position: fixed;
+  z-index: 2000;
+  width: 100%;
+  padding: 0;
+  top: 0;
+  left: 0;
+}
+
+div#userMessageContainer>div {
+  display: block;
+  padding: .5em;
+  font-size: 1.25em;
+  text-align: center;
+  color: whitesmoke;
+  background-color: #F37A28;
+}
+
+div#userMessageContainer>div.error {
+  font-weight: bold;
+  background-color: tomato;
+}
+
+input,
+select,
+textarea {
+  font-size: 1.25em;
+  padding: .25em;
+  border-radius: 0.15rem;
+  background: white;
+  border: 1px solid gray;
+}
+
+textarea {
+  width: 100%;
+  min-height: 10em;
+  resize: vertical;
+}
